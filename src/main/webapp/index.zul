@@ -1,0 +1,194 @@
+<window  mode="overlapped" position="center" width="80%" height="100%"
+	viewModel="@id('vm') @init('com.testtask.catalog.disk.CatalogViewModel')">
+	
+	
+	<borderlayout height="100%" width="100%">
+		<west minsize="100" size="30%" splittable="true" collapsible="true">
+	        <borderlayout>
+	            <north flex="true" border="none" size="10%">
+	                <div style="background:#f2f2f2">
+	                	<separator spacing="20px" /> 
+	                    <hlayout style="font-size:40px">
+	                    	<label value="Message:" class="boxlabel" style="font-size:20px" />
+							<label id="messageLable" style="font-weight:bold;font-size:20px" value="@bind(vm.message)"/>
+						</hlayout>
+	                </div>
+	            </north>
+	            <center border="none" flex="true">
+	                <div style="background:#d9d9d9">
+	                    <label value="Find Disk" class="boxlabel" 
+	                        style="color:gray;font-size:30px" />	
+	                    <separator spacing="20px" />                    
+		                <hbox align="center">
+						    Keyword:
+						    <textbox value="@bind(vm.keyword)" id="keywordBox"/>						    
+						</hbox>
+						<separator spacing="20px" />
+						<label value="Disk diametr, inches" class="boxlabel" />
+						<combobox id="diskD" width="120px"
+		                    model="@load(vm.diameters)" selectedItem="@bind(vm.diskD)">
+		                    <template name="model">
+		                        <comboitem label="@load(each)"/>
+		                    </template>
+		                </combobox>
+						<separator spacing="20px" />
+						<button id="searchButton" label="Search" onClick="@command('search')"/>
+						<separator spacing="20px" />
+						<button id="searchAllButton" label="Show All Disks" onClick="@command('findAll')"/>
+						<separator spacing="20px" />
+					</div>
+	            </center>
+	            <south border="none" flex="true" size="55%">
+	                <div style="background:#f2f2f2">
+	                	<label value="Add Disk"
+	                    	style="color:gray;font-size:30px" />
+	                    <separator spacing="20px" />
+	                    <hbox align="center">
+						    Disk Model:
+						    <textbox id="addDiskModel" value="@bind(vm.addModel)"/>						    
+						</hbox>
+						<separator spacing="20px" />
+						<label value="Disk diameter, inches" class="boxlabel" />
+						<combobox id="addDiskD" width="120px"
+		                    model="@load(vm.diameters)" selectedItem="@bind(vm.addDiskD)">
+		                    <template name="model">
+		                        <comboitem label="@load(each)"/>
+		                    </template>
+		                </combobox>
+		                <separator spacing="20px" />   		               
+						<hbox align="center">
+						    Disk color:
+						    <textbox id="addDiskColor" value="@bind(vm.addColor)"/>						    
+						</hbox> 
+		                <separator spacing="20px" /> 
+		                <hbox align="center">
+						    Disk Price, $:
+						    <textbox cols="8" constraint="/^[0-9]+(\.[0-9]+$)|([0-9]+$)/: Please enter a double value" id="addDiskPrice" value="@bind(vm.addPrice)" />
+						    Disk Weight, kg:
+						    <textbox cols="8" constraint="/^[0-9]+(\.[0-9]+$)|([0-9]+$)/: Please enter a double value" id="addDiskWeight" value="@bind(vm.addWeight)" />
+						</hbox> 
+						<separator spacing="20px" />
+						<hbox align="center">
+						    Disk description:
+						    <textbox rows="2" cols="35"  id="addDiskDesc" value="@bind(vm.addDescription)"/>						    
+						</hbox> 
+						<separator spacing="20px" /> 
+						<hbox align="center">
+						    Disk Material:
+						    <textbox id="addDiskMaterial" value="@bind(vm.addMaterial)"/>						    
+						</hbox>
+						<separator spacing="20px" />
+						<button id="addDisk" label="Add Disk" onClick="@command('addNewDisk')"/>
+						<separator spacing="20px" /> 
+	                </div>
+	            </south>
+	        </borderlayout>
+    	</west>
+    	
+    	
+    	
+    	<center border="0">
+	        <borderlayout>
+	            <north flex="true" border="none" size="65%">
+	                <div>
+	                    <label value="Search Result - List of Disks" style="color:gray;font-size:30px"/>
+	                    <listbox id="diskListbox" height="400px" emptyMessage="No disk found"
+	                    model="@bind(vm.list)" selectedItem="@bind(vm.selectedDisk)" style="margin-top:10px">
+						    <listhead>
+						    	<listheader label="Id" width="5%" />
+						        <listheader label="Model" />
+						        <listheader label="Diametr, inches" />
+						        <listheader label="Color" />
+						        <listheader label="Price, USD" width="20%"/>
+						    </listhead>
+						    <template name="model">
+							    <listitem>
+							    	<listcell label="${each.id}"></listcell>
+							        <listcell label="${each.model}"></listcell>
+							        <listcell label="${each.diameter}"></listcell>
+							        <listcell label="${each.color}"></listcell>
+							        <listcell>$<label value="${each.price}" /></listcell>
+							    </listitem>
+							</template>
+						</listbox>
+	                </div>
+	            </north>
+	            <center border="none" flex="true">
+	                <div style="background:#d9d9d9" width="100%" >
+	                    <label value="Detailed information about selected Disk"
+	                        style="color:gray;font-size:30px" />
+	                    
+	                    <hbox style="margin-top:20px" id="detailBox">
+							<vbox>
+							
+								<hlayout>
+									Id : <label id="IdLabel" style="font-weight:bold" value="@bind(vm.selectedDisk.id)"/>
+								</hlayout>
+								<separator spacing="5px" />
+								
+								<hlayout>
+									Model : 
+									<textbox id="selectedDiskName" style="font-weight:bold" value="@bind(vm.selectedDisk.model)"/>	
+								</hlayout>
+								<separator spacing="5px" />
+								
+								<hlayout>
+								<label value=" Disk diameter, inches" class="boxlabel" />
+								<combobox id="selectedDiskD" width="90px"
+				                    model="@load(vm.diameters)" selectedItem="@bind(vm.selectedDisk.diameter)">
+				                    <template name="model">
+				                        <comboitem label="@load(each)"/>
+				                    </template>
+				                </combobox>
+				                </hlayout>				                
+				                
+				                <separator spacing="20px" />
+								<button id="removeDisk" label="Remove Disk from Catalog" onClick="@command('removeDisk')"/>
+								<separator spacing="5px" />
+								<button id="editDisk" label="Save Changes to Catalog" onClick="@command('editDisk')"/>
+								<separator spacing="20px" /> 
+							</vbox>
+								
+							<vbox>
+								<hlayout>
+									Color : 
+									<textbox id="selectedDiskColor" style="font-weight:bold" value="@bind(vm.selectedDisk.color)"/>									
+								</hlayout>
+								<separator spacing="5px" />
+								
+								<hlayout>
+									Weight, kg :
+									<textbox id="selectedDiskWeight" style="font-weight:bold" value="@bind(vm.selectedDisk.weight)"
+										constraint="/^[0-9]+\.[0-9]+$/: Please enter a double value"/>
+								</hlayout>
+								<separator spacing="5px" />
+								
+								<hlayout>
+									Price : 
+									<span>$<textbox id="selectedDiskPrice" style="font-weight:bold" value="@bind(vm.selectedDisk.price)"
+										constraint="/^[0-9]+\.[0-9]+$/: Please enter a double value"/></span>									
+								</hlayout>
+							</vbox>
+								
+							<vbox>
+								<hlayout>
+									Material : 
+									<textbox id="selectedDiskMaterial" style="font-weight:bold" value="@bind(vm.selectedDisk.material)"/>									
+								</hlayout>
+								<separator spacing="5px" />
+								
+								<hlayout>
+									Description : 
+									<textbox id="selectedDiskDescription" style="font-weight:bold" value="@bind(vm.selectedDisk.description)" 
+									rows="2" cols="35"/>
+								</hlayout>					
+							</vbox>	
+						</hbox>
+	                    
+	                </div>
+	            </center>            
+	        </borderlayout>
+    	</center>
+       
+	</borderlayout>
+</window>

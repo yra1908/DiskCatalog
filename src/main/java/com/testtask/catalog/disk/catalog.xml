@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<disks>
+	<disk>
+		<id>1</id>
+		<content>{"id":1,"model":"some_model","diameter":20,"color":"red","price":100.0,"weight":20.0,"material":"steel","description":"nice disk"}</content>
+	</disk>
+	<disk>
+		<id>3</id>
+		<content>{"id":3,"model":"some model3","diameter":19,"color":"silver","price":110.0,"weight":18.0,"material":"aluminium","description":"nice disk"}</content>
+	</disk>	
+	<disk>
+		<id>4</id>
+		<content>{"id":4,"model":"compact","diameter":20,"color":"grey","price":10.3,"weight":31.0,"material":"aluminium","description":"cheap disks"}</content>
+	</disk>
+	<disk>
+		<id>7</id>
+		<content>{"id":7,"model":"elite","diameter":20,"color":"silver","price":12.5,"weight":23.2,"material":"titanium","description":"for tuning cars"}</content>
+	</disk>
+	<disk>
+		<id>8</id>
+		<content>{"id":8,"model":"cool","diameter":20,"color":"black &amp; white","price":120.3,"weight":25.0,"material":"steel","description":"very nice cool disk"}</content>
+	</disk>
+	<disk>
+		<id>10</id>
+		<content>{"id":10,"model":"normal","diameter":19,"color":"white","price":12.65,"weight":13.85,"material":"steel","description":"for trains"}</content>
+	</disk>
+	<disk>
+		<id>11</id>
+		<content>{"id":11,"model":"hi-teck","diameter":20,"color":"pink","price":56.2,"weight":20.24,"material":"wood","description":"for ladies"}</content>
+	</disk>
+<disk>
+<id>12</id>
+<content>{"id":12,"model":"fdfd","diameter":19,"color":"qqqq","price":12.6,"weight":12.6,"material":"dssd","description":"dsds"}</content>
+</disk>
+</disks>
