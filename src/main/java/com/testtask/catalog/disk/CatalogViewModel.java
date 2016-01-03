@@ -253,10 +253,9 @@ public class CatalogViewModel {
      * Copying resource file catalog.xml to temp folder on Server
      * It's happening when first launch app on Server 
      */
-    private void initParser(){
-        
-        File file = new File(getClass().getResource(CatalogParser.FILE_NAME).getPath()
-                .replace(CatalogParser.PATH_TO_REMOVE, CatalogParser.PATH_TO_ADD));
+    private void initParser(){        
+                 
+        File file = new File(CatalogParser.getPathToFile()); 
         
         if(file.exists() && !file.isDirectory()){
             System.out.println("ping File exist");

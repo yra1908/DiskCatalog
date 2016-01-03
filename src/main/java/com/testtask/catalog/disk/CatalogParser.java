@@ -40,20 +40,11 @@ import com.testtask.catalog.disk.model.Disk;
 public class CatalogParser {    
     
     public static final String FILE_NAME = "catalog.xml";    
-    public static final String PATH_TO_REMOVE = "wtpwebapps/DiskCatalog/WEB-INF/classes/com/testtask/catalog/disk/";
-    public static final String PATH_TO_ADD ="temp/";  
+    public static final String RESOURCE_DIR = "/temp/";        
     private static final String DISK_ID = "id";
     private static final String DISK_CONTENT = "content";
-    private static final String DISK = "disk";   
-        
+    private static final String DISK = "disk"; 
     
-    
-    private String getPathToFile(){
-        String allPath = getClass().getResource(FILE_NAME).getPath();  // /C:/dev/STSworkspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DiskCatalog/WEB-INF/classes/com/testtask/catalog/disk/catalog.xml
-        String newPath = allPath.replace(PATH_TO_REMOVE, PATH_TO_ADD);
-        return newPath;
-    }
-
     /**
      * Retrieve all Disks from catalog.xml 
      * @return List<Disk> with all disks in file
@@ -307,6 +298,20 @@ public class CatalogParser {
             e.printStackTrace();
         }        
         return json;
-    }   
+    }  
+    
+    public static String getPathToFile(){
+        String filePath = System.getProperty("catalina.base").replace("\\", "/")+RESOURCE_DIR + FILE_NAME;
+        return filePath;
+    }
+    
+    /* Another way of looking for filePath
+     * private String getPathToFile(){
+         String allPath = getClass().getResource(FILE_NAME).getPath();  // /C:/dev/STSworkspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DiskCatalog/WEB-INF/classes/com/testtask/catalog/disk/catalog.xml
+         String newPath = allPath.replace(PATH_TO_REMOVE, PATH_TO_ADD);
+         System.out.println("new - "+newPath);
+         System.out.println("old - "+allPath);
+         return newPath;
+     }*/ 
     
 }
