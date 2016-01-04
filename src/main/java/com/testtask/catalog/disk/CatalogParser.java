@@ -46,6 +46,48 @@ public class CatalogParser {
     private static final String DISK = "disk"; 
     
     /**
+     * Copying resource file catalog.xml to temp folder on Server
+     * It's happening when first launch app on Server 
+     */
+    public void initFileForParser(){        
+                 
+        File file = new File(getPathToFile()); 
+        
+        if(file.exists() && !file.isDirectory()){
+            System.out.println("ping File exist");
+            return;
+        }       
+        
+        File initFile = new File(getClass().getResource(FILE_NAME).getPath());
+        
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(initFile);
+            os = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } catch (IOException e) {            
+            e.printStackTrace();
+        } finally {
+            try {
+                System.out.println("file copied!");
+                if(is!=null) {
+                    is.close();
+                }
+                if(os!=null) {
+                    os.close();                    
+                }
+            } catch (IOException e) {               
+                e.printStackTrace();
+            }            
+        } 
+    }
+    
+    /**
      * Retrieve all Disks from catalog.xml 
      * @return List<Disk> with all disks in file
      * @throws ParserConfigurationException
@@ -303,7 +345,7 @@ public class CatalogParser {
     public static String getPathToFile(){
         String filePath = System.getProperty("catalina.base").replace("\\", "/")+RESOURCE_DIR + FILE_NAME;
         return filePath;
-    }
+    }    
     
     /* Another way of looking for filePath
      * private String getPathToFile(){

@@ -81,4 +81,11 @@ public class CatalogServiceImpl implements CatalogService {
         return result;
     }
 
+
+    @Override
+    public void initParser() {
+        parser.initFileForParser();
+        
+    }
+
 }

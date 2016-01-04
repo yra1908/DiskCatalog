@@ -159,14 +159,14 @@
 								<hlayout>
 									Weight, kg :
 									<textbox id="selectedDiskWeight" style="font-weight:bold" value="@bind(vm.selectedDisk.weight)"
-										constraint="/^[0-9]+\.[0-9]+$/: Please enter a double value"/>
+										constraint="/^[0-9]+(\.[0-9]+$)|([0-9]+$)/: Please enter a double value" />
 								</hlayout>
 								<separator spacing="5px" />
 								
 								<hlayout>
 									Price : 
 									<span>$<textbox id="selectedDiskPrice" style="font-weight:bold" value="@bind(vm.selectedDisk.price)"
-										constraint="/^[0-9]+\.[0-9]+$/: Please enter a double value"/></span>									
+										constraint="/^[0-9]+(\.[0-9]+$)|([0-9]+$)/: Please enter a double value" /></span>									
 								</hlayout>
 							</vbox>
 								

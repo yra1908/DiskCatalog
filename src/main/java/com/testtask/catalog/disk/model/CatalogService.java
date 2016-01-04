@@ -39,4 +39,10 @@ public interface CatalogService {
      */
     public boolean editDisk(Disk disk);
 
+    /**
+     * Copying resource file catalog.xml to temp folder on Server
+     * It's happening when first launch app on Server 
+     */
+    public void initParser();
+
 }

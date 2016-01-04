@@ -48,7 +48,7 @@ public class CatalogViewModel {
     public void init() {
         setDiskD(19);
         setAddDiskD(19);  
-        initParser();
+        catalogService.initParser();
     } 
     
     public List<Disk> getList(){
@@ -247,48 +247,6 @@ public class CatalogViewModel {
             e.printStackTrace();
         }
         return disk;
-    }
-    
-    /**
-     * Copying resource file catalog.xml to temp folder on Server
-     * It's happening when first launch app on Server 
-     */
-    private void initParser(){        
-                 
-        File file = new File(CatalogParser.getPathToFile()); 
-        
-        if(file.exists() && !file.isDirectory()){
-            System.out.println("ping File exist");
-            return;
-        }       
-        
-        File initFile = new File(getClass().getResource(CatalogParser.FILE_NAME).getPath());
-        
-        InputStream is = null;
-        OutputStream os = null;
-        try {
-            is = new FileInputStream(initFile);
-            os = new FileOutputStream(file);
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = is.read(buffer)) > 0) {
-                os.write(buffer, 0, length);
-            }
-        } catch (IOException e) {            
-            e.printStackTrace();
-        } finally {
-            try {
-                System.out.println("file copied!");
-                if(is!=null) {
-                    is.close();
-                }
-                if(os!=null) {
-                    os.close();                    
-                }
-            } catch (IOException e) {               
-                e.printStackTrace();
-            }            
-        } 
-    }
+    }  
 
 }
